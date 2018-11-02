@@ -4,23 +4,27 @@ import { CoursesService } from './courses.servise';
 @Component({
     selector: 'courses',
     template: `
-    <h2>{{ title }}</h2>
-    <ul>
-        <li *ngFor= "let course of courses">
-            {{ course }}
-        </li>
-    </ul>
-    `,
+    {{ coruse.title | uppercase }} <br/>
+    {{ course.rating }} <br/>
+    {{ course.students }} <br/>
+    {{ course.price }} <br/>
+    {{ course.releaseDate }} <br/>
+
+    <input [value]="email" (keyup.enter)="email = $event.target.value; onKeyUp()"/>
+    `
+    
 })
 export class CoursesComponent {
-    title = "List of courses";
-    courses;
+    email = "me@example.com";
+   onKeyUp() {
+       console.log(this.email);
+   }
 
-    constructor(service: CoursesService) {
-        this.courses = service.getCourses();
-    }
-
-    getTitle() {
-        return this.title;
-    }
+   course = {
+       title: "The complete Angular course",
+       rating: 4.9745,
+       students: 30123,
+       price: 190.95,
+       releaseDate: new Date(2016, 3, 1)
+   }
 } 
